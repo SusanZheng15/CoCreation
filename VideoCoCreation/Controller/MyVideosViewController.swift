@@ -46,7 +46,7 @@ class MyVideosViewController: UIViewController {
     
     func getData(){
         self.videoTableView.isHidden = true
-        MyResourcesService.getMyVideosResource(search: "", types: "video", language: 1, my_resources: true, page_number: pageNumber, gid: nil, favorites: false, is_vr: false, careers: false) { (data, count) in
+        MyResourcesService.getMyVideosResource(search: "", types: "video", language: nil, my_resources: true, page_number: pageNumber, gid: nil, favorites: false, is_vr: false, careers: false) { (data, count) in
             DispatchQueue.main.async(execute: {
                 self.myResourceArray = data
                 self.resourceCount = count
@@ -58,7 +58,6 @@ class MyVideosViewController: UIViewController {
     }
     
     @objc func didTapOnResource(sender: UITapGestureRecognizer){
-        print(self.myResourceArray[(sender.view?.tag)!].getResourceID())
         MyResourcesService.getResourceDetail(resourceID: self.myResourceArray[(sender.view?.tag)!].getResourceID()) { (detail) in
             DispatchQueue.main.async(execute: {
                 if let urlString = detail.video_url{
@@ -105,14 +104,10 @@ extension MyVideosViewController: UITableViewDataSource{
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (videoTableView.contentOffset.y > 0)
-        {
-            // yourTableView is not on top.
+        if (videoTableView.contentOffset.y > 0){
             self.navigationController?.navigationBar.isHidden = true
         }
-        else
-        {
-            // yourTableView is already on top.
+        else{
             self.navigationController?.navigationBar.isHidden = false
         }
     }
@@ -120,7 +115,7 @@ extension MyVideosViewController: UITableViewDataSource{
         if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height){
             if myResourceArray.count < resourceCount{
                 pageNumber += 1
-                MyResourcesService.getMyVideosResource(search: "", types: "video", language: 1, my_resources: true, page_number: pageNumber, gid: nil, favorites: false, is_vr: false, careers: false) { (data, count) in
+                MyResourcesService.getMyVideosResource(search: "", types: "video", language: nil, my_resources: true, page_number: pageNumber, gid: nil, favorites: false, is_vr: false, careers: false) { (data, count) in
                     DispatchQueue.main.async(execute: {
                         self.myResourceArray.append(contentsOf: data)
                         self.videoTableView.reloadData()

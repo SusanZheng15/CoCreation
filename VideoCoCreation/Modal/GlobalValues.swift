@@ -9,6 +9,8 @@
 import Foundation
 import KeychainSwift
 import UIKit
+import AVKit
+import MobileCoreServices
 
 
 //let BASICURL = "https://q3.geniusplaza.com"
@@ -229,6 +231,22 @@ func unAuthorizedCode(statusCode: Int)->Bool{
     }
 }
 
+func compressVideo(inputURL: URL, outputURL: URL, handler:@escaping (_ exportSession: AVAssetExportSession?)-> Void) {
+    let urlAsset = AVURLAsset(url: inputURL, options: nil)
+    guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality) else {
+        handler(nil)
+        
+        return
+    }
+    
+    exportSession.outputURL = outputURL
+    exportSession.outputFileType = kUTTypeQuickTimeMovie as AVFileType
+    exportSession.shouldOptimizeForNetworkUse = true
+    exportSession.exportAsynchronously { () -> Void in
+        handler(exportSession)
+    }
+}
+
 extension UIViewController {
     
     
@@ -245,29 +263,7 @@ extension UIViewController {
         alertController.addAction(OKAction)
         self.present(alertController, animated: true, completion: completion)
     }
-    
-    func areThereAnyMissing(fields: [UIView])->[Bool]{
-        var arrayOfBool: [Bool] = []
-        
-        for field in fields{
-            if field is UITextField{
-                let textField = field as! UITextField
-                if (textField.text?.isReallyEmpty)!{
-                    textField.shakeAnimation()
-                    arrayOfBool.append(true)
-                }
-            }
-            if view is UITextView{
-                let textView = field as! UITextView
-                if (textView.text?.isReallyEmpty)!{
-                    textView.shakeAnimation()
-                    arrayOfBool.append(true)
-                }
-            }
-        }
-        return arrayOfBool
-    }
-    
+
     func checkForMissingParameters(fields: [UIView], textViewPlaceholder: String?, requiredData: [Any?]?)->[Bool]{
         var arrayOfBool: [Bool] = []
         
@@ -283,6 +279,7 @@ extension UIViewController {
                 let textView = field as! UITextView
                 if let textViewPlaceholder = textViewPlaceholder{
                     if textView.text == textViewPlaceholder{
+                        textView.shakeAnimation()
                         arrayOfBool.append(true)
                     }
                 }
@@ -303,6 +300,12 @@ extension UIViewController {
         
         return arrayOfBool
     }
+    
+    func shakeMultipleViews(fields: [UIView]){
+        for field in fields{
+            field.shakeAnimation()
+        }
+    }
 }
 
 extension String {
@@ -311,7 +314,7 @@ extension String {
     }
 }
 
-extension UITextField {
+extension UIView {
     
     func shakeAnimation(){
         let animation = CABasicAnimation(keyPath: "position")
@@ -326,15 +329,3 @@ extension UITextField {
     }
 }
 
-extension UITextView {
-    func shakeAnimation(){
-        let animation = CABasicAnimation(keyPath: "position")
-        animation.duration = 0.05
-        animation.repeatCount = 5
-        animation.autoreverses = true
-        animation.fromValue = NSValue.init(cgPoint: CGPoint(x: self.center.x - 4, y: self.center.y))
-        animation.toValue = NSValue.init(cgPoint: CGPoint(x: self.center.x + 4, y: self.center.y))
-        
-        self.layer.add(animation, forKey: "position")
-    }
-}

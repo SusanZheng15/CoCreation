@@ -19,7 +19,7 @@ class MyVideosTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-       // setupLayout()
+    
     }
     
     override func layoutSubviews() {
@@ -28,12 +28,7 @@ class MyVideosTableViewCell: UITableViewCell {
         setupLayout()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+   
     func setupLayout(){
         
         addSubview(titleLabel)
@@ -84,9 +79,7 @@ class MyVideosTableViewCell: UITableViewCell {
         titleLabel.text = resource.getTitle()
         if let url = URL(string: resource.getResourceImageURL()){
             videoImageView.sd_setImage(with: url, completed: nil)
-        }else{
-            //
-        }
+        }else{}
         videoDescription.text = resource.getDescriptionString()
         
         if let url = URL(string: resource.getCreatorAvatarURLString()){

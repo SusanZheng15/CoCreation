@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		160F3161209B68B70097DA53 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160F3160209B68B70097DA53 /* Animation.swift */; };
 		160F3167209B71AC0097DA53 /* RequestServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160F3166209B71AC0097DA53 /* RequestServer.swift */; };
-		160F3169209B72260097DA53 /* MyResourcesServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160F3168209B72260097DA53 /* MyResourcesServer.swift */; };
+		160F3169209B72260097DA53 /* MyResourcesNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160F3168209B72260097DA53 /* MyResourcesNetwork.swift */; };
 		160F316C209B73BE0097DA53 /* MyResourcesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160F316B209B73BE0097DA53 /* MyResourcesService.swift */; };
 		160F316F209B74530097DA53 /* GeniusResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160F316E209B74530097DA53 /* GeniusResource.swift */; };
 		160F3171209B9FA80097DA53 /* CoCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160F3170209B9FA80097DA53 /* CoCreationView.swift */; };
@@ -25,7 +25,7 @@
 		164E589B209B52A0006757A5 /* MyVideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164E589A209B52A0006757A5 /* MyVideosViewController.swift */; };
 		164E589D209B59A8006757A5 /* MyVideosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164E589C209B59A8006757A5 /* MyVideosTableViewCell.swift */; };
 		164E589F209B5D11006757A5 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164E589E209B5D11006757A5 /* LoginScreenViewController.swift */; };
-		164E58A1209B6300006757A5 /* LoginServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164E58A0209B6300006757A5 /* LoginServer.swift */; };
+		164E58A1209B6300006757A5 /* LoginNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164E58A0209B6300006757A5 /* LoginNetwork.swift */; };
 		164E58A3209B63AD006757A5 /* GlobalValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164E58A2209B63AD006757A5 /* GlobalValues.swift */; };
 		16E556DE9CF01B9CCFD38D72 /* Pods_VideoCoCreation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BF31E548DD729FABBA349DC /* Pods_VideoCoCreation.framework */; };
 		1B27B8C4119B89DDB0A9E5EB /* Pods_VideoCoCreationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A39CAE3DDE3B75FFA1732C5 /* Pods_VideoCoCreationUITests.framework */; };
@@ -53,7 +53,7 @@
 		008C300FB294426D2AECEA0E /* Pods-VideoCoCreationUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoCoCreationUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VideoCoCreationUITests/Pods-VideoCoCreationUITests.release.xcconfig"; sourceTree = "<group>"; };
 		160F3160209B68B70097DA53 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		160F3166209B71AC0097DA53 /* RequestServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestServer.swift; sourceTree = "<group>"; };
-		160F3168209B72260097DA53 /* MyResourcesServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyResourcesServer.swift; sourceTree = "<group>"; };
+		160F3168209B72260097DA53 /* MyResourcesNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyResourcesNetwork.swift; sourceTree = "<group>"; };
 		160F316B209B73BE0097DA53 /* MyResourcesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyResourcesService.swift; sourceTree = "<group>"; };
 		160F316E209B74530097DA53 /* GeniusResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeniusResource.swift; sourceTree = "<group>"; };
 		160F3170209B9FA80097DA53 /* CoCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoCreationView.swift; sourceTree = "<group>"; };
@@ -75,7 +75,7 @@
 		164E589A209B52A0006757A5 /* MyVideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVideosViewController.swift; sourceTree = "<group>"; };
 		164E589C209B59A8006757A5 /* MyVideosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVideosTableViewCell.swift; sourceTree = "<group>"; };
 		164E589E209B5D11006757A5 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
-		164E58A0209B6300006757A5 /* LoginServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServer.swift; sourceTree = "<group>"; };
+		164E58A0209B6300006757A5 /* LoginNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNetwork.swift; sourceTree = "<group>"; };
 		164E58A2209B63AD006757A5 /* GlobalValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalValues.swift; sourceTree = "<group>"; };
 		4A39CAE3DDE3B75FFA1732C5 /* Pods_VideoCoCreationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoCoCreationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		796DD95F721FFFA1B107128B /* Pods-VideoCoCreationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoCoCreationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VideoCoCreationTests/Pods-VideoCoCreationTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,9 +149,9 @@
 		160F3165209B71280097DA53 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				164E58A0209B6300006757A5 /* LoginServer.swift */,
+				164E58A0209B6300006757A5 /* LoginNetwork.swift */,
 				160F3166209B71AC0097DA53 /* RequestServer.swift */,
-				160F3168209B72260097DA53 /* MyResourcesServer.swift */,
+				160F3168209B72260097DA53 /* MyResourcesNetwork.swift */,
 				160F316D209B73C60097DA53 /* JSON Serializer */,
 			);
 			path = Network;
@@ -462,7 +462,7 @@
 			files = (
 				164E586D209B4E15006757A5 /* MainTabBarController.swift in Sources */,
 				164E589D209B59A8006757A5 /* MyVideosTableViewCell.swift in Sources */,
-				164E58A1209B6300006757A5 /* LoginServer.swift in Sources */,
+				164E58A1209B6300006757A5 /* LoginNetwork.swift in Sources */,
 				160F3171209B9FA80097DA53 /* CoCreationView.swift in Sources */,
 				164E589F209B5D11006757A5 /* LoginScreenViewController.swift in Sources */,
 				160F3167209B71AC0097DA53 /* RequestServer.swift in Sources */,
@@ -470,7 +470,7 @@
 				164E5899209B5291006757A5 /* CreateVideoViewController.swift in Sources */,
 				164E589B209B52A0006757A5 /* MyVideosViewController.swift in Sources */,
 				160F3173209CDBE90097DA53 /* GeniusResourceDetail.swift in Sources */,
-				160F3169209B72260097DA53 /* MyResourcesServer.swift in Sources */,
+				160F3169209B72260097DA53 /* MyResourcesNetwork.swift in Sources */,
 				164E58A3209B63AD006757A5 /* GlobalValues.swift in Sources */,
 				160F316F209B74530097DA53 /* GeniusResource.swift in Sources */,
 				160F3161209B68B70097DA53 /* Animation.swift in Sources */,
@@ -652,7 +652,10 @@
 				DEVELOPMENT_TEAM = KZ34P34W9B;
 				INFOPLIST_FILE = VideoCoCreation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.geniusplaza.VideoCoCreation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -669,7 +672,10 @@
 				DEVELOPMENT_TEAM = KZ34P34W9B;
 				INFOPLIST_FILE = VideoCoCreation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.geniusplaza.VideoCoCreation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -686,7 +692,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KZ34P34W9B;
 				INFOPLIST_FILE = VideoCoCreationTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.geniusplaza.VideoCoCreationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -704,7 +714,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KZ34P34W9B;
 				INFOPLIST_FILE = VideoCoCreationTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.geniusplaza.VideoCoCreationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -721,7 +735,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KZ34P34W9B;
 				INFOPLIST_FILE = VideoCoCreationUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.geniusplaza.VideoCoCreationUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -738,7 +756,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KZ34P34W9B;
 				INFOPLIST_FILE = VideoCoCreationUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.geniusplaza.VideoCoCreationUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

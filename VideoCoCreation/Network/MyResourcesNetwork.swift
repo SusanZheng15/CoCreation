@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class MyResourcesServer: NSObject {
+class MyResourcesNetwork: NSObject {
     
     class func getResourcesBySearchWithAccessToken(search: String, types: String?, language: Int!, my_resources: Bool, page_number: Int, gid: Int?, favorites: Bool!, is_vr: Bool!, careers: Bool!, completion: @escaping (NSDictionary)->()){
         
@@ -56,7 +56,7 @@ class MyResourcesServer: NSObject {
                         completion(json)
                     }
                 }else if unAuthorizedCode(statusCode: httpResponse.statusCode){
-                    LoginServer.renewToken(completion: { (result) in
+                    LoginNetwork.renewToken(completion: { (result) in
                         if result{
                             getResourcesBySearchWithAccessToken(search: search, types: types, language: language, my_resources: my_resources, page_number: page_number, gid: gid, favorites: favorites, is_vr: is_vr, careers: careers, completion: { (resourcesArray) in
                                 completion(resourcesArray)
@@ -94,7 +94,7 @@ class MyResourcesServer: NSObject {
                 }
             }else if unAuthorizedCode(statusCode: httpResponse.statusCode){
                 do{
-                    LoginServer.renewToken(completion: { (result) in
+                    LoginNetwork.renewToken(completion: { (result) in
                         if result{
                             getResourceDetail(resourceID: resourceID, completion: { (jsonDictionary) in
                                 completion(jsonDictionary)
@@ -151,7 +151,7 @@ class MyResourcesServer: NSObject {
                             }
                         }else if unAuthorizedCode(statusCode: statusCode!){
                             do{
-                                LoginServer.renewToken(completion: { (result) in
+                                LoginNetwork.renewToken(completion: { (result) in
                                     if result{
                                         createResource(title: title, description: description, type: type, language: language, imageData: imageData, audio: audio, completion: { (response) in
                                             completion(response)
@@ -201,7 +201,7 @@ class MyResourcesServer: NSObject {
                                 print(response)
                             }else if unAuthorizedCode(statusCode: statusCode!){
                                 do{
-                                    LoginServer.renewToken(completion: { (result) in
+                                    LoginNetwork.renewToken(completion: { (result) in
                                         if result{
                                             self.uploadVideo(resource_id: resource_id, videoData: videoData, completion: { (result) in
                                                 completion(result)

@@ -9,7 +9,7 @@
 import UIKit
 import KeychainSwift
 
-class LoginServer: NSObject {
+class LoginNetwork: NSObject {
 
     class func renewToken(completion: @escaping (Bool)->()){
         guard let url = URL(string: API_ENDPOINTS.getTokenURL()) else {return}

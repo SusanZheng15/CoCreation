@@ -26,8 +26,8 @@ class CoCreationView: UIView {
     var submitButton = UIButton()
     var playButtonView = UIImageView()
     var removeVideoButton = UIButton()
-    
     var delegate: CoCreationViewDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -154,7 +154,6 @@ class CoCreationView: UIView {
     }
     
     @objc func didTapOnImage(sender: UITapGestureRecognizer){
-        print("tap tap")
         delegate?.didTapAddImage()
     }
     

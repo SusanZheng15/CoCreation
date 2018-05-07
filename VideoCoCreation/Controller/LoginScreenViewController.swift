@@ -11,7 +11,7 @@ import KeychainSwift
 
 class LoginScreenViewController: UIViewController {
 
-    private var loginTextField = UITextField()
+    private var usernameTextField = UITextField()
     private var passwordTextField = UITextField()
     private var loginButton = UIButton()
     private var logo = UIImageView()
@@ -28,12 +28,12 @@ class LoginScreenViewController: UIViewController {
     func setupLayout(){
         self.view.backgroundColor = UIColor(red:0.19, green:0.16, blue:0.15, alpha:1.0)
        
-        view.addSubview(loginTextField)
+        view.addSubview(usernameTextField)
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
         view.addSubview(logo)
         
-        setTextFieldAttribute(textField: loginTextField, placeholder: "Username")
+        setTextFieldAttribute(textField: usernameTextField, placeholder: "Username")
         setTextFieldAttribute(textField: passwordTextField, placeholder: "Password")
         
         logo.translatesAutoresizingMaskIntoConstraints = false
@@ -45,15 +45,15 @@ class LoginScreenViewController: UIViewController {
         logo.clipsToBounds = true
         logo.image = #imageLiteral(resourceName: "Genius-Plaza-transp-logo")
         
-        loginTextField.translatesAutoresizingMaskIntoConstraints = false
-        loginTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
-        loginTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -60).isActive = true
-        loginTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        loginTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
+        usernameTextField.translatesAutoresizingMaskIntoConstraints = false
+        usernameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        usernameTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -60).isActive = true
+        usernameTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        usernameTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
 
         
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 30).isActive = true
+        passwordTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 30).isActive = true
         passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         passwordTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
@@ -87,24 +87,23 @@ class LoginScreenViewController: UIViewController {
     @objc func didTapLogin(sender: UIButton){
         self.view.endEditing(true)
         
-        guard let username = loginTextField.text else {return}
-        guard let password = passwordTextField.text else {return}
-        
-        if self.checkForMissingParameters(fields: [loginTextField, passwordTextField], textViewPlaceholder: nil, requiredData: nil).contains(true){
+        if self.checkForMissingParameters(fields: [usernameTextField, passwordTextField], textViewPlaceholder: nil, requiredData: nil).contains(true){
                 //
         }else{
             Animation.sharedInstance.bounceButtonAnimation(for: sender, completion: {})
+            guard let username = usernameTextField.text else {return}
+            guard let password = passwordTextField.text else {return}
+            
             let lowerCasedPassword = password.lowercased()
             
-            LoginServer.getAccessToken(username: username, password: lowerCasedPassword) { (accessToken) in
+            LoginNetwork.getAccessToken(username: username, password: lowerCasedPassword) { (accessToken) in
                 OperationQueue.main.addOperation({
                     if accessToken != "" {
                         self.userKeyChain.set(accessToken, forKey:"accessToken")
                         let vc = MainTabBarController()
                         self.present(vc, animated: true, completion: nil)
                     } else{
-                        self.loginTextField.shakeAnimation()
-                        self.passwordTextField.shakeAnimation()
+                        self.shakeMultipleViews(fields: [self.usernameTextField, self.passwordTextField])
                         self.alert(message: "Login Credentials Invalid")
                     }
                 })

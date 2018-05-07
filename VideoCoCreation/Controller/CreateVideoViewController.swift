@@ -171,6 +171,23 @@ class CreateVideoViewController: UIViewController {
         }
     }
     
+    func clearFields(){
+        coCreationView.titleTextField.text = ""
+        coCreationView.descriptionTextView.text = "Enter description here"
+        coCreationView.languageTextField.text = ""
+        imageData = nil
+        languageID = nil
+        tempVideoOutput = nil
+        self.videoData = nil
+        self.coCreationView.setImage(image: #imageLiteral(resourceName: "backimage"))
+        self.coCreationView.pickImageTitle.isHidden = false
+        self.coCreationView.playButtonView.isHidden = true
+        self.coCreationView.removeVideoButton.isHidden = true
+        self.coCreationView.uploadVideoButton.isHidden = false
+        self.coCreationView.submitButton.isHidden = true
+        
+    }
+    
     func didTapSubmit(){
        
         guard let title = coCreationView.titleTextField.text else {return}
@@ -183,78 +200,35 @@ class CreateVideoViewController: UIViewController {
             errorAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(errorAlert, animated: true, completion: nil)
         }else{
-            let data = try? Data(contentsOf: self.tempVideoOutput!)
-            print("File size before compression: \(Double((data?.count)! / 1048576)) mb")
-            let compressedURL = NSURL.fileURL(withPath: NSTemporaryDirectory() + NSUUID().uuidString + ".m4v")
-            compressVideo(inputURL: self.tempVideoOutput!, outputURL: compressedURL) { (exportSession) in
-                guard let session = exportSession else {return}
-                
-                switch session.status{
-                    
-                case .unknown:
-                    break
-                case .waiting:
-                    break
-                case .exporting:
-                    break
-                case .completed:
-                    guard let compressedData = try? Data(contentsOf: compressedURL) else {return}
-                    
-                    print("File size after compression: \(Double(compressedData.count / 1048576)) mb")
-                    MyResourcesService.uploadVideo(title: title, description: description, type: 6, language: self.languageID!, videoData: compressedData, imageData: self.imageData!) { (result) in
-                        if result.isSuccess{
-                            DispatchQueue.main.async(execute: {
-                            
-                                let successAlert = UIAlertController(title: "Upload complete!",
-                                                                     message: "Your video has been successfully uploaded",
-                                                                     preferredStyle: .alert)
-                                
-                                let okay = UIAlertAction.init(title: "Okay", style: .default, handler: { (alert) in
-                                    let vc = MyVideosViewController()
-                                    vc.getData()
-                                    self.view.setNeedsLayout()
-                                })
-                                successAlert.addAction(okay)
-                                self.present(successAlert, animated: true, completion: nil)
-                            })
-                        }else if result.isFailure{
-                            print("failed")
-                    
-                            DispatchQueue.main.async(execute: {
-                                let errorAlert = UIAlertController(title: "Error",
-                                                                   message: "NETWORK_ISSUE._PLEASE_TRY_LATER",
-                                                                   preferredStyle: .alert)
-                                errorAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                                
-                                self.present(errorAlert, animated: true, completion: nil)
-                            })
-                        }
-                    }
-                case .failed:
-                    break
-                case .cancelled:
-                    break
+            MyResourcesService.uploadVideo(title: title, description: description, type: 6, language: self.languageID!, videoOutput: self.tempVideoOutput!, imageData: self.imageData!) { (result) in
+                if result.isSuccess{
+                    DispatchQueue.main.async(execute: {
+                        
+                        let successAlert = UIAlertController(title: "Upload complete!",
+                                                             message: "Your video has been successfully uploaded",
+                                                             preferredStyle: .alert)
+                        
+                        let okay = UIAlertAction.init(title: "Okay", style: .default, handler: { (alert) in
+                            let vc = MyVideosViewController()
+                            vc.getData()
+                            self.clearFields()
+                        })
+                        successAlert.addAction(okay)
+                        self.present(successAlert, animated: true, completion: nil)
+                    })
+                }else if result.isFailure{
+                    DispatchQueue.main.async(execute: {
+                        let errorAlert = UIAlertController(title: "Error",
+                                                           message: "NETWORK_ISSUE._PLEASE_TRY_LATER",
+                                                           preferredStyle: .alert)
+                        errorAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        
+                        self.present(errorAlert, animated: true, completion: nil)
+                    })
                 }
             }
         }
     }
-    
-    func compressVideo(inputURL: URL, outputURL: URL, handler:@escaping (_ exportSession: AVAssetExportSession?)-> Void) {
-        let urlAsset = AVURLAsset(url: inputURL, options: nil)
-        guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality) else {
-            handler(nil)
-            
-            return
-        }
-        
-        exportSession.outputURL = outputURL
-        exportSession.outputFileType = kUTTypeQuickTimeMovie as AVFileType
-        exportSession.shouldOptimizeForNetworkUse = true
-        exportSession.exportAsynchronously { () -> Void in
-            handler(exportSession)
-        }
-    }
-    
 }
 
 extension CreateVideoViewController: UIPickerViewDataSource{
