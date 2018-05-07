@@ -1,0 +1,6 @@
+framework module Pods_VideoCoCreationTests {
+  umbrella header "Pods-VideoCoCreationTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

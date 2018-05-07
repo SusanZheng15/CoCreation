@@ -209,6 +209,24 @@ let API_ENDPOINTS = apiEndpoints()
 let LANGUAGE_CODES = languageCodes()
 let KEYCHAIN_SWIFT = KeychainSwift()
 
+func checkStatusCode(statusCode: Int)->Bool{
+    if statusCode >= 200 && statusCode <= 299{
+        return true
+    }
+    else{
+        return false
+    }
+}
+
+func unAuthorizedCode(statusCode: Int)->Bool{
+    if statusCode == 403{
+        return true
+    }
+        
+    else{
+        return false
+    }
+}
 
 extension UIViewController {
     
@@ -225,5 +243,11 @@ extension UIViewController {
         let OKAction = UIAlertAction(title: actionTitle, style: .default, handler: nil)
         alertController.addAction(OKAction)
         self.present(alertController, animated: true, completion: completion)
+    }
+}
+
+extension String {
+    var isReallyEmpty: Bool {
+        return self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 }

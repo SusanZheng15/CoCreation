@@ -1,0 +1,30 @@
+PODS:
+  - Alamofire (4.7.2)
+  - IQKeyboardManagerSwift (6.0.1)
+  - KeychainSwift (11.0.0)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
+
+DEPENDENCIES:
+  - Alamofire
+  - IQKeyboardManagerSwift
+  - KeychainSwift
+  - SDWebImage
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - IQKeyboardManagerSwift
+    - KeychainSwift
+    - SDWebImage
+
+SPEC CHECKSUMS:
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  IQKeyboardManagerSwift: 748d06e0f8134fc28934031e6377da3cf3d4f38c
+  KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+
+PODFILE CHECKSUM: 8dd561b6d68efdfbb2e0888bc90ffd56bb1099d2
+
+COCOAPODS: 1.5.0
