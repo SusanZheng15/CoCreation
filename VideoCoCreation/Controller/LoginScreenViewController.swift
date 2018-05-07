@@ -50,7 +50,7 @@ class LoginScreenViewController: UIViewController {
         loginTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -60).isActive = true
         loginTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         loginTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
-        loginTextField.text = "myteacher"
+
         
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 30).isActive = true
@@ -58,7 +58,7 @@ class LoginScreenViewController: UIViewController {
         passwordTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         passwordTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
         passwordTextField.isSecureTextEntry = true
-        passwordTextField.text = "123"
+
         
         setButtonAttribute(button: loginButton)
         loginButton.translatesAutoresizingMaskIntoConstraints = false
@@ -83,19 +83,17 @@ class LoginScreenViewController: UIViewController {
         button.backgroundColor = UIColor(red:0.00, green:0.48, blue:1.00, alpha:1.0)
         button.layer.cornerRadius = 10
     }
-    
-    
+
     @objc func didTapLogin(sender: UIButton){
         self.view.endEditing(true)
-        Animation.sharedInstance.bounceButtonAnimation(for: sender, completion: {})
+        
         guard let username = loginTextField.text else {return}
         guard let password = passwordTextField.text else {return}
         
-        if password.isReallyEmpty{
-            passwordTextField.shakeAnimation()
-        }else if username.isReallyEmpty{
-            loginTextField.shakeAnimation()
+        if self.checkForMissingParameters(fields: [loginTextField, passwordTextField], textViewPlaceholder: nil, requiredData: nil).contains(true){
+                //
         }else{
+            Animation.sharedInstance.bounceButtonAnimation(for: sender, completion: {})
             let lowerCasedPassword = password.lowercased()
             
             LoginServer.getAccessToken(username: username, password: lowerCasedPassword) { (accessToken) in

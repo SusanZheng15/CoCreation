@@ -172,6 +172,7 @@ class CoCreationView: UIView {
     }
     
     @objc func didTapSubmit(sender: UIButton){
+        Animation.sharedInstance.bounceButtonAnimation(for: sender, completion: {})
         delegate?.didTapSubmitVideo()
     }
     

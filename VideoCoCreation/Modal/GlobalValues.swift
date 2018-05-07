@@ -245,6 +245,64 @@ extension UIViewController {
         alertController.addAction(OKAction)
         self.present(alertController, animated: true, completion: completion)
     }
+    
+    func areThereAnyMissing(fields: [UIView])->[Bool]{
+        var arrayOfBool: [Bool] = []
+        
+        for field in fields{
+            if field is UITextField{
+                let textField = field as! UITextField
+                if (textField.text?.isReallyEmpty)!{
+                    textField.shakeAnimation()
+                    arrayOfBool.append(true)
+                }
+            }
+            if view is UITextView{
+                let textView = field as! UITextView
+                if (textView.text?.isReallyEmpty)!{
+                    textView.shakeAnimation()
+                    arrayOfBool.append(true)
+                }
+            }
+        }
+        return arrayOfBool
+    }
+    
+    func checkForMissingParameters(fields: [UIView], textViewPlaceholder: String?, requiredData: [Any?]?)->[Bool]{
+        var arrayOfBool: [Bool] = []
+        
+        for field in fields{
+            if field is UITextField{
+                let textField = field as! UITextField
+                if (textField.text?.isReallyEmpty)!{
+                    textField.shakeAnimation()
+                    arrayOfBool.append(true)
+                }
+            }
+            if field is UITextView{
+                let textView = field as! UITextView
+                if let textViewPlaceholder = textViewPlaceholder{
+                    if textView.text == textViewPlaceholder{
+                        arrayOfBool.append(true)
+                    }
+                }
+                
+                if (textView.text?.isReallyEmpty)!{
+                    textView.shakeAnimation()
+                    arrayOfBool.append(true)
+                }
+            }
+        }
+        if let requiredData = requiredData{
+            for data in requiredData{
+                if data == nil{
+                    arrayOfBool.append(true)
+                }
+            }
+        }
+        
+        return arrayOfBool
+    }
 }
 
 extension String {
@@ -265,5 +323,18 @@ extension UITextField {
         
         self.layer.add(animation, forKey: "position")
         
+    }
+}
+
+extension UITextView {
+    func shakeAnimation(){
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 5
+        animation.autoreverses = true
+        animation.fromValue = NSValue.init(cgPoint: CGPoint(x: self.center.x - 4, y: self.center.y))
+        animation.toValue = NSValue.init(cgPoint: CGPoint(x: self.center.x + 4, y: self.center.y))
+        
+        self.layer.add(animation, forKey: "position")
     }
 }

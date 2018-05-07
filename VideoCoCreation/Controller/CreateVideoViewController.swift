@@ -172,10 +172,11 @@ class CreateVideoViewController: UIViewController {
     }
     
     func didTapSubmit(){
+       
         guard let title = coCreationView.titleTextField.text else {return}
         guard let description = coCreationView.descriptionTextView.text else {return}
         
-        if title == "" || title.isReallyEmpty == true || description == "" || description.isReallyEmpty == true || languageID == nil || imageData == nil{
+        if self.checkForMissingParameters(fields: [coCreationView.titleTextField, coCreationView.descriptionTextView], textViewPlaceholder: "Enter description here", requiredData: [languageID, imageData, tempVideoOutput]).contains(true){
             let errorAlert = UIAlertController(title: "Error",
                                                message: "Please be sure to fill all the fields",
                                                preferredStyle: .alert)
