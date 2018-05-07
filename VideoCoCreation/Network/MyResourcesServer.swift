@@ -119,7 +119,7 @@ class MyResourcesServer: NSObject {
         let parameters = ["title": "\(title)",
             "description": "\(description)",
             "type_id": "\(type)",
-            "language_id": "\(GLOBAL_LANGUAGE_ID)"]
+            "language_id": "\(language)"]
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             if let data = imageData {

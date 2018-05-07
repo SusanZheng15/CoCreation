@@ -26,7 +26,6 @@ class MyVideosViewController: UIViewController {
         let navBar = self.navigationController?.navigationBar
         self.title = "My Video"
         navBar?.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
-       
         self.view.backgroundColor = .darkGray
         navBar?.isTranslucent = true
         navBar?.barTintColor = UIColor(red:0.00, green:0.48, blue:1.00, alpha:1.0)
@@ -47,7 +46,7 @@ class MyVideosViewController: UIViewController {
     
     func getData(){
         self.videoTableView.isHidden = true
-        MyResourcesService.getMyVideosResource(search: "", types: "video", language: 1, my_resources: true, page_number: pageNumber, gid: 0, favorites: false, is_vr: false, careers: false) { (data, count) in
+        MyResourcesService.getMyVideosResource(search: "", types: "video", language: 1, my_resources: true, page_number: pageNumber, gid: nil, favorites: false, is_vr: false, careers: false) { (data, count) in
             DispatchQueue.main.async(execute: {
                 self.myResourceArray = data
                 self.resourceCount = count
@@ -105,11 +104,23 @@ extension MyVideosViewController: UITableViewDataSource{
         return self.videoTableView.frame.size.height * 0.4
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (videoTableView.contentOffset.y > 0)
+        {
+            // yourTableView is not on top.
+            self.navigationController?.navigationBar.isHidden = true
+        }
+        else
+        {
+            // yourTableView is already on top.
+            self.navigationController?.navigationBar.isHidden = false
+        }
+    }
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height){
             if myResourceArray.count < resourceCount{
                 pageNumber += 1
-                MyResourcesService.getMyVideosResource(search: "", types: "video", language: 1, my_resources: true, page_number: pageNumber, gid: 0, favorites: false, is_vr: false, careers: false) { (data, count) in
+                MyResourcesService.getMyVideosResource(search: "", types: "video", language: 1, my_resources: true, page_number: pageNumber, gid: nil, favorites: false, is_vr: false, careers: false) { (data, count) in
                     DispatchQueue.main.async(execute: {
                         self.myResourceArray.append(contentsOf: data)
                         self.videoTableView.reloadData()

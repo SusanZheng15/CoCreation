@@ -72,8 +72,6 @@ class LoginScreenViewController: UIViewController {
     func setTextFieldAttribute(textField: UITextField, placeholder: String){
     
         textField.layer.cornerRadius = 5
-       // textField.font = UIFont(
-     //   textField.font = UIFont.init(name: "AvenirNext-Medium", size: textField.frame.size.height / 2)
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         textField.backgroundColor = .white
         textField.autocorrectionType = .no
@@ -88,23 +86,33 @@ class LoginScreenViewController: UIViewController {
     
     
     @objc func didTapLogin(sender: UIButton){
+        self.view.endEditing(true)
         Animation.sharedInstance.bounceButtonAnimation(for: sender, completion: {})
         guard let username = loginTextField.text else {return}
         guard let password = passwordTextField.text else {return}
-        let lowerCasedPassword = password.lowercased()
-        self.view.endEditing(true)
-      
-        LoginServer.getAccessToken(username: username, password: lowerCasedPassword) { (accessToken) in
-            OperationQueue.main.addOperation({
-                if accessToken != "" {
-                    self.userKeyChain.set(accessToken, forKey:"accessToken")
-                    let vc = MainTabBarController()
-                    self.present(vc, animated: true, completion: nil)
-                } else{
-                    self.alert(message: "Login Credentials Invalid")
-                }
-            })
+        
+        if password.isReallyEmpty{
+            passwordTextField.shakeAnimation()
+        }else if username.isReallyEmpty{
+            loginTextField.shakeAnimation()
+        }else{
+            let lowerCasedPassword = password.lowercased()
+            
+            LoginServer.getAccessToken(username: username, password: lowerCasedPassword) { (accessToken) in
+                OperationQueue.main.addOperation({
+                    if accessToken != "" {
+                        self.userKeyChain.set(accessToken, forKey:"accessToken")
+                        let vc = MainTabBarController()
+                        self.present(vc, animated: true, completion: nil)
+                    } else{
+                        self.loginTextField.shakeAnimation()
+                        self.passwordTextField.shakeAnimation()
+                        self.alert(message: "Login Credentials Invalid")
+                    }
+                })
+            }
         }
+       
     }
     
 }

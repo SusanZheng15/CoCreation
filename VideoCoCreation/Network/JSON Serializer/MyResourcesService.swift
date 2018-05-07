@@ -11,7 +11,7 @@ import Alamofire
 
 class MyResourcesService: NSObject {
     
-    class func getMyVideosResource(search: String, types: String?, language: Int!, my_resources: Bool, page_number: Int, gid: Int, favorites: Bool!, is_vr: Bool!, careers: Bool!, completion: @escaping (_ array: [GeniusResource], _ totalCount: Int)->()){
+    class func getMyVideosResource(search: String, types: String?, language: Int?, my_resources: Bool, page_number: Int, gid: Int?, favorites: Bool!, is_vr: Bool!, careers: Bool!, completion: @escaping (_ array: [GeniusResource], _ totalCount: Int)->()){
         MyResourcesServer.getResourcesBySearchWithAccessToken(search: search, types: types, language: language, my_resources: my_resources, page_number: page_number, gid: gid, favorites: favorites!, is_vr: is_vr, careers: careers) { (searchDictionary) in
             let resources = searchDictionary["Resources"] as! NSArray
             let count = searchDictionary["count"] as! Int

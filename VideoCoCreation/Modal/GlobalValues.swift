@@ -8,6 +8,7 @@
 
 import Foundation
 import KeychainSwift
+import UIKit
 
 
 //let BASICURL = "https://q3.geniusplaza.com"
@@ -249,5 +250,20 @@ extension UIViewController {
 extension String {
     var isReallyEmpty: Bool {
         return self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+}
+
+extension UITextField {
+    
+    func shakeAnimation(){
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 5
+        animation.autoreverses = true
+        animation.fromValue = NSValue.init(cgPoint: CGPoint(x: self.center.x - 4, y: self.center.y))
+        animation.toValue = NSValue.init(cgPoint: CGPoint(x: self.center.x + 4, y: self.center.y))
+        
+        self.layer.add(animation, forKey: "position")
+        
     }
 }

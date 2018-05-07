@@ -202,7 +202,6 @@ class CreateVideoViewController: UIViewController {
                     print("File size after compression: \(Double(compressedData.count / 1048576)) mb")
                     MyResourcesService.uploadVideo(title: title, description: description, type: 6, language: self.languageID!, videoData: compressedData, imageData: self.imageData!) { (result) in
                         if result.isSuccess{
-                            print("success")
                             DispatchQueue.main.async(execute: {
                             
                                 let successAlert = UIAlertController(title: "Upload complete!",
@@ -210,6 +209,9 @@ class CreateVideoViewController: UIViewController {
                                                                      preferredStyle: .alert)
                                 
                                 let okay = UIAlertAction.init(title: "Okay", style: .default, handler: { (alert) in
+                                    let vc = MyVideosViewController()
+                                    vc.getData()
+                                    self.view.setNeedsLayout()
                                 })
                                 successAlert.addAction(okay)
                                 self.present(successAlert, animated: true, completion: nil)
